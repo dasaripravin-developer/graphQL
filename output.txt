@@ -1,0 +1,161 @@
+- To get all todos
+
+query ExampleQuery {
+  todos {
+    id
+    completed
+    title
+    userId
+  }
+}
+
+Output:
+
+{
+  "data": {
+    "todos": [
+      {
+        "id": "1",
+        "title": "delectus aut autem",
+        "completed": false
+      },
+      {
+        "id": "2",
+        "title": "quis ut nam facilis et officia qui",
+        "completed": false
+      },
+      {
+        "id": "3",
+        "title": "fugiat veniam minus",
+        "completed": false
+      },
+      {
+        "id": "4",
+        "title": "et porro tempora",
+        "completed": true
+      }]
+   }
+}
+
+- To get single todo by id
+
+query ExampleQuery($getTodoId: ID!) {
+  getTodo(id: $getTodoId) {
+    id
+    title
+    completed
+  }
+}
+
+Output:
+
+{
+  "data": {
+    "getTodo": {
+      "id": "1",
+      "title": "delectus aut autem",
+      "completed": false
+    }
+  }
+}
+
+- To get all users
+
+query ExampleQuery {
+  getAllUsers {
+    id
+    name
+    phone
+    website
+  }
+}
+
+Output:
+
+{
+  "data": {
+    "getAllUsers": [
+      {
+        "id": "1",
+        "name": "Leanne Graham",
+        "phone": "1-770-736-8031 x56442",
+        "website": "hildegard.org"
+      },
+      {
+        "id": "2",
+        "name": "Ervin Howell",
+        "phone": "010-692-6593 x09125",
+        "website": "anastasia.net"
+      },
+      {
+        "id": "3",
+        "name": "Clementine Bauch",
+        "phone": "1-463-123-4447",
+        "website": "ramiro.info"
+      }]
+   }
+}
+
+
+- To get todos and user data in single query
+
+query ExampleQuery($getUserId: ID!) {
+  getUser(id: $getUserId) {
+    id
+    name
+    phone
+    website
+  }
+}
+
+Output:
+
+{
+  "data": {
+    "getUser": {
+      "id": "1",
+      "name": "Leanne Graham",
+      "phone": "1-770-736-8031 x56442",
+      "website": "hildegard.org"
+    }
+  }
+}
+
+- To get todos with user data of it
+
+query ExampleQuery {
+  todos {
+    id
+    title
+    completed
+    user {
+      name
+    }
+  }
+}
+
+Output:
+
+{
+  "data": {
+    "todos": [
+      {
+        "id": "1",
+        "title": "delectus aut autem",
+        "completed": false,
+        "user": {
+          "name": "Leanne Graham"
+        }
+      },
+      {
+        "id": "2",
+        "title": "quis ut nam facilis et officia qui",
+        "completed": false,
+        "user": {
+          "name": "Leanne Graham"
+        }
+      }]
+   }
+}
+
+
