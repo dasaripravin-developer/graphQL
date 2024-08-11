@@ -1,0 +1,21 @@
+- Create user
+
+mutation CreateUser($firstName: String!, $lastName: String!, $email: String!, $password: String!) {
+  createUser(firstName: $firstName, lastName: $lastName, email: $email, password: $password) {
+    firstName
+    lastName
+    email
+  }
+}
+
+Output:
+
+{
+  "data": {
+    "createUser": {
+      "firstName": "pravin",
+      "lastName": "dasari",
+      "email": "pravin1@gmail.com"
+    }
+  }
+}

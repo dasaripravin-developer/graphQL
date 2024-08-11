@@ -1,10 +1,10 @@
-import { ApolloServer } from "@apollo/server";
 import { expressMiddleware } from "@apollo/server/express4";
 import express from "express";
 import bodyParser from "body-parser";
+import { startApolloServer } from "./graphql/index.js";
 import axios from "axios";
 
-// Resolvers define how to fetch the types defined in your schema.
+/* // Resolvers define how to fetch the types defined in your schema.
 // This resolver retrieves books from the "books" array above.
 const resolvers = {
   Todos: {
@@ -49,12 +49,12 @@ const resolvers = {
       return response.data;
     },
   },
-};
+}; */
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.
-const typeDefs = `#graphql
+/* const typeDefs = `#graphql
   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
   # This "Totos" type defines the queryable fields for every book in our data source.
@@ -83,26 +83,17 @@ const typeDefs = `#graphql
     getAllUsers: [User],
     getUser(id: ID!): User
   }
-`;
+`; */
 
 async function startServer() {
   const app = express();
   app.use(bodyParser.json());
-
-  // The ApolloServer constructor requires two parameters: your schema
-  // definition and your set of resolvers.
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-  });
-
   // Passing an ApolloServer instance to the `expressMiddleware` function:
   //  1. creates an Express app
   //  2. installs your ApolloServer instance as middleware
   //  3. prepares your app to handle incoming requests
-  await server.start();
-  app.use("/graphql", expressMiddleware(server));
 
+  app.use("/graphql", expressMiddleware(await startApolloServer()));
   app.listen(8000, () => console.log("server started at : 8000"));
 }
 
